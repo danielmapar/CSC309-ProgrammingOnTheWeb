@@ -1,0 +1,17 @@
+body{
+    background-color: yellow;
+    color: blue;
+}
+
+body > p, ul{
+    color: red;
+}
+
+.central > li{
+    color: green;
+}
+
+.central p, .central, ul .central li{
+    background-color: cyan;
+}
+

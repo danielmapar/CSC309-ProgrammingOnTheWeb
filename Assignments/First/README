@@ -1,0 +1,4 @@
+Amazon AMI id: ami-132f6d23
+Files location: /var/www/html/
+Apache will start during VM boot up. If it doesn't just execute --> sudo chkconfig httpd on
+To check if it is online --> chkconfig --list http

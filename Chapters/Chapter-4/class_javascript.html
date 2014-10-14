@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>
+        Class Exercise
+        </title>
+        <script type="text/javascript">
+            function factorial(){
+                console.log("test");
+                var x = document.getElementById("number").value;
+                res = "";
+                for(i = 1, fact = 1; i <= x; (i++, fact*=i)){
+                    res += i + "!= " + fact + "<br />";
+                }
+                var s = document.getElementById("result");
+                s.innerHTML = res;
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            Factorial of:
+            <input type="text" id="number">
+            <input type="button" value="Factorial" onclick="factorial()">
+        </form>
+        <h2>
+            Table of Factorial
+        </h2>
+        <span id="result"></span>
+    </body>
+</html>

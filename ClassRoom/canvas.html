@@ -1,0 +1,56 @@
+<DOCTYPE html>
+<html>
+    <head>
+        <title>Class Canvas</title>
+        <script>
+
+            function drawCoolShape(context, x, y){
+                context.save();  /*  add context to a stack */
+                context.beginPath();
+                context.translate(x, y);
+                for(var i = 1; i < 10; i++){
+                    context.rect(0,0,30,30);
+                    context.rotate(2* Math.PI / 9);
+                }
+                context.stroke();
+                context.restore();
+            }
+            window.onload = function(){
+                var c = document.getElementById("drawing");
+                var co = c.getContext("2d");
+                var img = new Image();
+                img.onload = function(){
+                    co.drawImage(img, 10, 10);
+                }
+                img.src = "http://domaingang.com/wp-content/uploads/2012/02/example.png";
+            }
+
+            /*
+            window.onload = function(){
+                var c = document.getElementById("drawing");
+                var co = c.getContext("2d");
+                co.strokeStyle = "red";
+                drawCoolShape(co, 100, 100);
+                drawCoolShape(co, 200, 150);
+            }
+            
+            window.onload = function(){
+                var canvas = document.getElementById("drawing");
+                var context = canvas.getContext("2d");
+                context.strokeStyle = "blue";
+                context.beginPath();
+                context.moveTo(250, 50);
+                context.lineTo(50, 250);
+                context.lineTo(450, 250);
+                context.stroke();
+                <!-- context.closePath(); -->
+                <!-- context.stroke(); -->
+                <!-- context.lineTo(450, 50); -->
+                <!-- context.stroke(); -->
+            }*/
+    </script>
+    </head>
+    <body>
+        <canvas id="drawing" width="500" height="300"> </canvas>
+    </body>
+</html>

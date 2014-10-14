@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Third Class Example</title>
+        <script type="text/javascript">
+            <!-- event object is a javascript padron -->
+            function moveBall(event){
+                if(mov){
+                    var gp = document.getElementById("pic01");
+                    gp.style.left = event.pageX-gp.width/2+"px";
+                    gp.style.top  = event.pageY-gp.height/2+"px";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <p>click and drag ball</p>
+        <img src="img/ball.jpg" id="pic01" onmousemove="moveBall(event)" onmousedown="mov=true" onmouseup="mov=false" ondragstrat="return false" />
+    </body>
+</html>
