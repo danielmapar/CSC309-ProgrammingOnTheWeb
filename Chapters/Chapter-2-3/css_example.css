@@ -1,0 +1,14 @@
+body{
+    background-color: yellow;
+    color: blue;
+}
+
+p{ color: red; }
+
+.central,.item{
+    color: green;
+}
+
+#item{
+    background-color: cyan;
+}

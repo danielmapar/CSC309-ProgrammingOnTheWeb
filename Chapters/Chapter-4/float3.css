@@ -1,0 +1,27 @@
+div, p{
+    border: 2px solid black;
+}
+
+.column{
+    float: right;
+    width: 25%;
+}
+
+#aftercolumns{
+    background-color: yellow;
+    clear: both;
+}
+
+#columns{
+    -moz-column-count: 3;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 20px;
+}
+/* auto means to let the browser decide the margin */
+#center{
+    margin-left: auto;
+    margin-right: auto;
+    width: 33%;
+    text-align: center;
+}

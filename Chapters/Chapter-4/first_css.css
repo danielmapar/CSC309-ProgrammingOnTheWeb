@@ -1,0 +1,67 @@
+#main{
+    background-color: #ddffdd;
+    font: 12pt "Tahoma", "Arial", sans-serif;
+}
+
+.announcement{
+    background-color: blue;
+    color: white;
+}
+
+.firstword{
+    font-size: 32pt;
+}
+
+/* Context selector (descendant combinator) */
+/*.newslist li{
+    background-color: yellow;
+    font-weight: bold;
+}
+*/
+li{
+    background-color: cyan;
+    font-weight: normal;
+}
+/* Only the first child <li> will be yellow, the other follow their style*/
+.newslist > li{
+    background-color: yellow;
+    font-weight: bold;
+}
+
+/* For every tag inside div id="banner", they all follow this properties */
+div#banner *{
+    border: 2px solid black;
+}
+
+/* Affects the direct neighbor of a specific tag */
+p + p {
+    background-color: white;
+    color: red;
+}
+/* Affects all siblings after the declaration of the tag, no meter the distance */
+span~p{
+    background-color: pink;
+}
+
+h2{
+    border: 5px solid red;
+    border-left: thick dotted #cc0088;
+    border-bottom-color: rgb(0,128,128);
+    border-bottom-style: double;
+    border-radius: 10px;
+    border-bottom-right-radius: 80px 40px;
+    box-shadow: 10px 10px 5px gray inset; /* inset means that the shadow is internal */
+}
+
+table, td, th{
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+/* Example */
+
+div p{ text-align: left; }
+#top > p {text-align: center; }
+p { text-align: right; }
+.new { text-align: justify; }
+

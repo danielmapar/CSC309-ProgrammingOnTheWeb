@@ -1,0 +1,60 @@
+/* Second CSS */
+
+body{
+  text-decoration: underline;
+  background-color: cyan;
+}
+
+p{
+  background-color: yellow;
+}
+
+ul{
+  font-style: italic;
+}
+/*
+h2{
+  color: red;
+}
+Overrides previous h2 
+h2{
+  color: blue;
+}
+*/
+#europe{
+  line-height: 1000px;
+  font-style: italic;
+}
+
+.urgent{
+  color: red;
+}
+
+.new{
+  background-color: green;
+}
+
+.one{
+  background-color: red;
+}
+
+.two{
+  color: white;
+  font-family: Impact;
+}
+/* Only apply for all h2 tags that uses class urgent */
+h2.urgent{
+  text-decoration: overline;
+  text-align: center;
+}
+
+a:hover{
+    background-color: green;
+    font-style: italic;
+}
+/*odd, even or 3n+1*/
+li:nth-child(odd){
+    background-color: gray;
+    font-weight: bold;
+}
+

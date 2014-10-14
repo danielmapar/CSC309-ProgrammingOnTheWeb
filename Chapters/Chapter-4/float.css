@@ -1,0 +1,39 @@
+#ex1, #ex2{
+    /* border-width, border-style, border-color */
+    border: 2px solid black;
+    /* Element width */
+    width: 12em;
+    padding-left: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+#ex2{
+    text-align: right;
+    font-size: 200%;
+    font-weight: bold;
+}
+
+#sidebar{
+    /* Make element float in horizontal direction  */
+    float: right;
+    border: 2px solid black;
+    margin-top: 0em;
+}
+
+#align_text{
+    text-align: right;
+}
+
+img.hovericon{
+    float: right;
+    width: 130px;
+}
+
+#sidebar2{
+    float: right;
+}
+
+#section2{
+    clear: right;
+}
