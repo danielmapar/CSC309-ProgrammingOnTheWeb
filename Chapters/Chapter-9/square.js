@@ -5,8 +5,10 @@
 
 	window.onload = function(){
 
+		setInterval(addSquare, 100000000000); //412
 		var add = document.getElementById("add");
 		add.onclick = addSquare;
+		add.onmouseover = addSquare;
 		var colors = document.getElementById("colors");
 		colors.onclick = changeColors;
 
