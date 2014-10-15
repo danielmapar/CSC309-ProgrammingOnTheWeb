@@ -1,0 +1,8 @@
+/* CSS style for buttons that have been clicked */
+.clickedbutton{
+	font-weight: italic;
+}
+
+#clickedbutton{
+	font-weight: italic;
+}
