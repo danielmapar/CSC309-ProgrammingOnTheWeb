@@ -1,0 +1,21 @@
+#canvas-container {
+   width: 100%;
+   text-align:center;
+}
+
+canvas {
+	cursor: pointer;
+	border: 1px solid black;
+	width: 900px;
+	height: 400px;
+	display: inline;
+}
+
+#game_data{
+	text-align: left;
+	margin-left: 24%;
+	font-family: "Arial";
+	font-size: 14;
+	font-weight: bold;
+	display: none;
+}

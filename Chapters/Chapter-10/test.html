@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Test</title>
+		<script>
+			function getAllNodes(current, nodes){
+				if(current.nodeType != 1) // if not on ELEMENT_NODE
+					return;
+				nodes.push(current);
+				for(var i = 0; i < current.childNodes; i++){
+					getAllNodes(current.childNodes[i], nodes);
+				}
+			}
+
+			function showDOM(){
+				var msg = "";
+				var nodes = [];
+				//return all DOM nodes
+				getAllNodes(document.documentElement, nodes);
+				for(var x = 0; x < Number(nodes.length); x++){
+					msg += "<p>" + nodes[x].nodeName + "</p>"; 
+				}
+				document.getElementById("result").innerHTML = msg;
+			}
+		</script>
+	</head>
+	<body>
+		<h1>A Nice Table</h1>
+
+		<table id="multiplicationTable" border="1">
+			<tr><td>1</td><td>2</td></tr>
+			<tr><td>3</td><td>4</td></tr>
+		</table>
+		<form>
+			<input type="button" id="printDOM" value="Press to Print DOM" onclick="showDOM();"/>
+		</form>
+
+		<span id="result"></span>
+	</body>
+</html>
