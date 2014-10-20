@@ -13,7 +13,7 @@
 	var wonGame;
 
 	// Elements information
-	var blocks = [];
+	var blocks;
 	
 	// Block information
 	var spacingBlocksToPaddle;
@@ -252,14 +252,14 @@
 			var emptyBlocks = 0;
 			for(var i = 0; i < blocks.length; i++){
 				if(blocks[i] !== undefined && blocks[i] !== null){		
+					// Lateral collision
 					if((
-					   (ball.x >= blocks[i].x+blocks[i].width && ball.x-1 <= blocks[i].x+blocks[i].width) ||
-					   (ball.x+ball.width <= blocks[i].x && ball.x+ball.width+1 >= blocks[i].x)
+					   (ball.x >= blocks[i].x+blocks[i].width-1 && ball.x-1 <= blocks[i].x+blocks[i].width) ||
+					   (ball.x+ball.width-1.5 <= blocks[i].x && ball.x+ball.width >= blocks[i].x)
 					   ) 
 					   &&
 				   	   (
-				   	   	(ball.y >= blocks[i].y && ball.y <= blocks[i].y+blocks[i].height) ||  
-				   	    (ball.y+ball.height >= blocks[i].y && ball.y+ball.height <= blocks[i].y+blocks[i].height)
+				   	   	(ball.y >= blocks[i].y && ball.y <= blocks[i].y+blocks[i].height) 
 				   	   )
 				   	  ){
 				   	  	if(!ballMoveAlreadyDetermined){
@@ -279,6 +279,7 @@
 						speedBallMovement(blocks[i].color);
 						incrementScore(blocks[i].color);
 						delete blocks[i];
+					// Frontal collision
 					}else if(ball.y <= (blocks[i].y+blocks[i].height) && 
 				   	  ((ball.x >= blocks[i].x && ball.x <= (blocks[i].x+blocks[i].width)) || 
 				       (ball.x+ball.width >= blocks[i].x && ball.x+ball.width <= (blocks[i].x+blocks[i].width)))){
@@ -458,13 +459,13 @@
 		gameOver = false;
 		wonGame = false;
 		blocks = [];
+		orangeCollision = false;
+		redCollision = false;
+		numberOfCollisions = 0;
+		paddleShrink = false;
 		if(nextLevel == false){
 			score = 0;
-			lives = 100;
-			paddleShrink = false;
-			numberOfCollisions = 0;
-			redCollision = false;
-			orangeCollision = false;
+			lives = 3;
 			nextStage = false;
 		}else{
 			nextStage = true;
