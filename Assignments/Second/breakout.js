@@ -9,7 +9,8 @@
 	var gameOver;
 	var score;
 	var lives;
-	var score;
+	var nextStage;
+	var wonGame;
 
 	// Elements information
 	var blocks = [];
@@ -25,8 +26,9 @@
 	var paddleWidth;
 	var paddleVerticalPosition;
 	var paddleHorizontalPosition;
-	var paddleSpeed = 5;
+	var paddleSpeed = 8;
 	var paddleImage;
+	var paddleShrink;
 
 	// Ball information
 	var ball;
@@ -34,6 +36,9 @@
 	var ballMoveDirection; // values = up, down, up-left, up-right, down-left, down-right
 	var ballSpeed;
 	var ballImage;
+	var numberOfCollisions;
+	var redCollision;
+	var orangeCollision;
 
 
 	window.onload = function(){
@@ -194,10 +199,20 @@
 	function checkCollision(){
 
 	 	// Check collision with the bottom of the screen 
-	    if(ball.y == paddle.y){
-	    	livesUpdate();
+	    if(ball.y >= canvas.height){
+	    	if(wonGame == false){
+	    		livesUpdate();
+	    	}else{
+		    	if(ballMoveDirection == "down"){
+					ballMoveDirection = "up";
+				}else if(ballMoveDirection == "down-right"){
+					ballMoveDirection = "up-left";
+				}else if(ballMoveDirection == "down-left"){
+					ballMoveDirection = "up-right";
+				}
+		    }
 	    // Ball collision with paddle
-	    }else if(paddle.y == (ball.y+ball.height) && 
+	    }else if(paddle.y <= (ball.y+ball.height) && 
 		  (ball.x+ball.width) >= paddle.x && ball.x <= (paddle.x+paddle.width)){
 			if(paddle.x+paddle.width/2-ball.width/2 == ball.x){
 				ballMoveDirection = "up";
@@ -207,7 +222,7 @@
 				ballMoveDirection = "up-left";
 			}
 		// Check collision with screen edges 
-		}else if(ball.x == 0 || (ball.x+ball.width) == canvas.width){
+		}else if(ball.x <= 0 || (ball.x+ball.width) >= canvas.width){
 			if(ballMoveDirection == "up-left"){
 				ballMoveDirection = "up-right";
 			}else if(ballMoveDirection == "up-right"){
@@ -218,7 +233,12 @@
 				ballMoveDirection = "down-left";
 			}
 		// Check collision with screen top
-		}else if(ball.y == 0){
+		}else if(ball.y <= 0){
+			// Shrink paddle by half
+			if(paddleShrink == false){
+				paddle.width = paddle.width/2; 
+				paddleShrink = true;
+			}
 			if(ballMoveDirection == "up"){
 				ballMoveDirection = "down";
 			}else if(ballMoveDirection == "up-right"){
@@ -229,6 +249,7 @@
 		// Check collision with blocks
 		}else{
 			var ballMoveAlreadyDetermined = false;
+			var emptyBlocks = 0;
 			for(var i = 0; i < blocks.length; i++){
 				if(blocks[i] !== undefined && blocks[i] !== null){		
 					if((
@@ -253,6 +274,9 @@
 							}
 							ballMoveAlreadyDetermined = true;
 						}
+						numberOfCollisions++;
+						// Increment ball speed after touching the red/orange row
+						speedBallMovement(blocks[i].color);
 						incrementScore(blocks[i].color);
 						delete blocks[i];
 					}else if(ball.y <= (blocks[i].y+blocks[i].height) && 
@@ -261,6 +285,8 @@
 						if(!ballMoveAlreadyDetermined){
 							if(ballMoveDirection == "up"){
 								ballMoveDirection = "down";
+							}else if(ballMoveDirection == "down"){
+								ballMoveDirection = "up";
 							}else if(ballMoveDirection == "up-right"){
 								ballMoveDirection = "down-right";
 							}else if(ballMoveDirection == "up-left"){
@@ -268,11 +294,44 @@
 							}
 							ballMoveAlreadyDetermined = true;
 						}
+						numberOfCollisions++;
+						// Increment ball speed after touching the red/orange row
+						speedBallMovement(blocks[i].color);
 						incrementScore(blocks[i].color);
 						delete blocks[i];
 				   	}
+				}else{
+					emptyBlocks++;
 				}
 			}
+
+			if(emptyBlocks == blocks.length){
+				if(nextStage == false){
+					nextStage = true;
+					startGame(true);
+				}else{
+					wonGame = true;
+				}
+			}
+		}
+	}
+
+	function speedBallMovement(color){
+		// Speed up ball after touching the red/orange row
+		if(color !== undefined && color !== null){
+			if(color == 'red' && redCollision == false){
+				ballSpeed += 0.1;
+				redCollision = true;
+			}else if(color == 'orange' && orangeCollision == false){
+				ballSpeed += 0.1;
+				orangeCollision = true;
+			}
+		}
+		// Speed up ball movement after 4 and 12 collisions
+		if(numberOfCollisions == 4){
+			ballSpeed += 0.1;
+		}else if(numberOfCollisions == 12){
+			ballSpeed += 0.1;
 		}
 	}
 
@@ -287,7 +346,6 @@
 			score += 7;
 		}
 		setScore();
-
 	}
 
 	function renderAllElements(){
@@ -391,15 +449,23 @@
 		ball.draw();
 	}
 
-	function startGame(){
+	function startGame(nextLevel){
+		
 		// Setup global status variables
 		ballMoveDirection = "up";
-		ballSpeed = 0.5;
+		ballSpeed = 5.3;
 		paused = false;
 		gameOver = false;
-		score = 0;
-		lives = 3;
-
+		wonGame = false;
+		if(nextLevel === undefined || nextLevel === null || nextLevel == false){
+			score = 0;
+			lives = 100;
+			paddleShrink = false;
+			numberOfCollisions = 0;
+			redCollision = false;
+			orangeCollision = false;
+			nextStage = false;
+		}
 		// Set data on screen
 		setGameInformation();
 
