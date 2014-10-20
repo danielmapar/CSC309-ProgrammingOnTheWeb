@@ -26,7 +26,7 @@
 	var paddleWidth;
 	var paddleVerticalPosition;
 	var paddleHorizontalPosition;
-	var paddleSpeed = 8;
+	var paddleSpeed = 10;
 	var paddleImage;
 	var paddleShrink;
 
@@ -305,9 +305,9 @@
 				}
 			}
 
+			// Check for next stage, or end of game
 			if(emptyBlocks == blocks.length){
-				if(nextStage == false){
-					nextStage = true;
+				if(nextStage == false){	
 					startGame(true);
 				}else{
 					wonGame = true;
@@ -361,7 +361,7 @@
 	function canvasMouseEvent(e){
 		clearInterval(ballInterval);
 		clearCanvas();
-		startGame();
+		startGame(false);
 	}
 
 	function canvasKeyEvent(e){
@@ -453,11 +453,12 @@
 		
 		// Setup global status variables
 		ballMoveDirection = "up";
-		ballSpeed = 5.3;
+		ballSpeed = 0.3;
 		paused = false;
 		gameOver = false;
 		wonGame = false;
-		if(nextLevel === undefined || nextLevel === null || nextLevel == false){
+		blocks = [];
+		if(nextLevel == false){
 			score = 0;
 			lives = 100;
 			paddleShrink = false;
@@ -465,6 +466,8 @@
 			redCollision = false;
 			orangeCollision = false;
 			nextStage = false;
+		}else{
+			nextStage = true;
 		}
 		// Set data on screen
 		setGameInformation();
