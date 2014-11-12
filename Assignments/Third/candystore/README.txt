@@ -1,11 +1,8 @@
 README
 
-Pedro A. Fonseca 1001009669 
-Guilherme de Oliveira Borges - 1001006403
-
 External Frameworks
 
-Jquery 2.0, Bootstrap 3.0, HTML5 Regex to validade user input data
+JQuery 2.0, Bootstrap 3.0, HTML5 Regex to validade user input data
 
 Controllers
 
