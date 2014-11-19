@@ -8,17 +8,17 @@ include("application/views/header.php") ?>
 	   <div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">Creditcard</label>
 	    <div class="col-sm-4">
-	     <?php echo form_input('creditcard',set_value('creditcard'),"class='form-control' pattern='.{16,}' title='16 characters minimum' placeholder='Creditcard' required"); ?> 
+	     <?php echo form_input('creditcard',set_value('creditcard'),"class='form-control' pattern='.{16,16}' title='16 characters minimum' placeholder='Creditcard' required"); ?> 
 	    </div>
 	  </div>
 	  <div class="form-group">
 		    <label for="inputEmail3" class="col-sm-2 control-label">Expiration date</label>
 		  <div class="row">
 			    <div class="col-sm-1">
-			    <?php echo form_input('yy',set_value('yy'),"class='form-control' pattern='^\d{4}$/^(20[14-19]\d|20[14-9]\d|2019)$/' title='Creditcard expired' placeholder='YYYY' required"); ?> 
+			    <?php echo form_input('yy',set_value('yy'),"class='form-control' pattern='/^2013|2014|2015|2016|2017|2018|2019|2020|2021$' title='Creditcard expired' placeholder='YYYY' required"); ?> 
 			  </div>
 			  <div class="col-md-1 col-md-offset-0">
-			    <?php echo form_input('mm',set_value('mm'),"class='form-control' pattern='^\d{2}$' placeholder='MM' required"); ?> 
+			    <?php echo form_input('mm',set_value('mm'),"class='form-control' pattern='[1-9]|1[012]' placeholder='MM' required"); ?> 
 		    	</div>
 	    </div>
 	  </div>

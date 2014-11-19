@@ -70,6 +70,7 @@ class ShoppingCart extends CI_Controller
 		}
 		if(isset($_SESSION['cart']))
 		{
+
 			$item = $_SESSION['cart'];
 			while (list($key, $value) = each($item)) {
 				$this->load->model('product_model');
@@ -79,7 +80,9 @@ class ShoppingCart extends CI_Controller
 			}
 		
 		}
-		
+		if(empty($arr)){
+			redirect("EStore");
+		}
 		$data['products']=$arr;
 		$this->load->view('ShoppingCart/Checkout.php',$data);
 		

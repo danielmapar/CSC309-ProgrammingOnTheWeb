@@ -44,6 +44,13 @@ class User extends CI_Controller {
 			$customer->password = $this->input->get_post('password');
 			
 			$this->Customer_Model->createAccount($customer);
+			
+			if (session_status() == PHP_SESSION_NONE) {
+	   			 session_start();
+			}
+			$_SESSION['customer'] = $this->Customer_Model->login($customer->login,$customer->password);
+
+
 			redirect('EStore', 'refresh');
 		}
 		$this->session->set_flashdata('message', $message);
@@ -70,6 +77,8 @@ class User extends CI_Controller {
 
             redirect('EStore', 'refresh');
 		}
+		$this->session->set_flashdata('message', 'Login failed!');
+		redirect('User', 'refresh');
    }
 
    function logout()

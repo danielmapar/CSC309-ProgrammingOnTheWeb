@@ -4,7 +4,7 @@ class Admin_Model extends CI_Model{
 	function getOrders()
 	{
 		$query = $this->db->get('orders');
-		return $query->result('orders');
+		return $query->result();
 		
 	}
 	
@@ -12,13 +12,13 @@ class Admin_Model extends CI_Model{
 	{
 		$query = $this->db->get_where('products',array('id' => $id));
 	
-		return $query->row(0,'Product');
+		return $query->row(0,'Products');
 	}
 	
 	function getCustomers()
 	{
 		$query = $this->db->get('customers');
-		return $query->result('customers');
+		return $query->result();
 	}
 	
 	function  deleteCustomer($id)

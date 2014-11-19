@@ -6,6 +6,14 @@ class Admin extends CI_Controller {
 		$config['upload_path'] = './images/product/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$this->load->library('upload', $config);
+		$this->load->library('form_validation');	
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+		if (!(isset($_SESSION['customer']) && $_SESSION['customer']->login == 'admin')){
+			redirect('EStore', 'refresh');
+		}
+		
 	}
 	
 	function index() {
@@ -75,8 +83,7 @@ class Admin extends CI_Controller {
 	function insertProd()
 	{
 		$this->load->model('admin_model');
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name','name','required|is_unique[product.name]');
+		$this->form_validation->set_rules('name','name','required|is_unique[products.name]');
 		$this->form_validation->set_rules('description','description','required');
 		$this->form_validation->set_rules('price','price','required');
 		
@@ -91,7 +98,7 @@ class Admin extends CI_Controller {
 	    		
 	    	$data = $this->upload->data();
 	    	$product->photo_url = $data['file_name'];
-	    		
+
 	    	$this->admin_model->insert($product);
 	    	
 	    	redirect('admin/edit');

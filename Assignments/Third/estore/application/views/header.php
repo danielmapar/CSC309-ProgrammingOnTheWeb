@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        EStore Store
+        EStore
     </title>
 </head>
 <body>
@@ -34,7 +34,7 @@
 				}
                	if(isset($_SESSION['customer'])){
                		$usr = $_SESSION['customer'];
-	                if ($usr->id == 0 )
+	                if ($usr->login == 'admin' )
 	                {
 	                	echo '<li class="dropdown">';
 	                	echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrator <b class="caret"></b></a>';
