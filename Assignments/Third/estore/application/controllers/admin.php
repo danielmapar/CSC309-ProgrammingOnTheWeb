@@ -71,7 +71,7 @@ class admin extends CI_Controller {
 		
 		$fileUploadSuccess = $this->upload->do_upload();
 
-		if ($this->form_validation->run() == $fileUploadSuccess){
+		if ($this->form_validation->run()){
 			$product = new product();
 
 			$product->id = $id;
@@ -79,16 +79,18 @@ class admin extends CI_Controller {
 			$product->description = $this->input->get_post('description');
 			$product->price = $this->input->get_post('price');
 
-	    	$data = $this->upload->data();
-	    	$product->photo_url = $data['file_name'];
+			if($fileUploadSuccess){
+		    	$data = $this->upload->data();
+		    	$product->photo_url = $data['file_name'];
+	    	}else{
+	    		$product->photo_url = "";
+	    	}
 
 			$this->admin_model->update($product);
 			redirect('admin/Edit');
 		}
 		else
 		{
-			var_dump($this->form_validation->run());
-			var_dump($fileUploadSuccess);
 			print_r($this->upload->display_errors());
 		}
 	}

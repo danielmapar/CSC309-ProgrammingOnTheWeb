@@ -40,9 +40,15 @@ class admin_model extends CI_Model{
 	
 	function update($product) {
 		$this->db->where('id', $product->id);
-		return $this->db->update("products", array('name' => $product->name,
+		if($product->photo_url != ""){
+			return $this->db->update("products", array('name' => $product->name,
 				'description' => $product->description,
 				'price' => $product->price,
 				'photo_url' => $product->photo_url));
+		}else{
+			return $this->db->update("products", array('name' => $product->name,
+					'description' => $product->description,
+					'price' => $product->price));
+		}
 	}
 }
