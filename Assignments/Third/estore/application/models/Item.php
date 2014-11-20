@@ -1,6 +1,6 @@
 <?php
 
-class Item {
+class item {
     public $id;
     public $order_id;
     public $product_id;

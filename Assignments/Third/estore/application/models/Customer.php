@@ -1,6 +1,6 @@
 <?php
 
-class Customer {
+class customer {
     public $id;
     public $first;
     public $last;

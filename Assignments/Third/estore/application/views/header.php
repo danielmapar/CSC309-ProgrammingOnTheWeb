@@ -39,9 +39,9 @@
 	                	echo '<li class="dropdown">';
 	                	echo '<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrator <b class="caret"></b></a>';
 	                	echo '<ul class="dropdown-menu">';
-	                	echo '<li><a href="' . site_url("Admin/ShowOrders") . '">View orders</a></li>';
-	                	echo '<li><a href="' . site_url("Admin/Edit") . '">Edit products</a></li>';
-	                	echo '<li><a href="' . site_url("Admin/DeleteCustomerShow") . '">Delete customer</a></li>';
+	                	echo '<li><a href="' . site_url("admin/ShowOrders") . '">View orders</a></li>';
+	                	echo '<li><a href="' . site_url("admin/Edit") . '">Edit products</a></li>';
+	                	echo '<li><a href="' . site_url("admin/DeleteCustomerShow") . '">Delete customer</a></li>';
 	                	echo '</ul>';
 	                	echo '</li>';
 	                }
@@ -50,8 +50,8 @@
 						echo	'<li class="dropdown">';
 						echo	'<a href="#" class="dropdown-toggle" data-toggle="dropdown">Shopping Cart <b class="caret"></b></a>';
 						echo	'<ul class="dropdown-menu">';
-						echo	'<li><a href=" ' . site_url("ShoppingCart/Edit") . '">Edit</a></li>';
-						echo	'<li><a href=" ' . site_url("ShoppingCart/Checkout"). '">Checkout</a></li>';
+						echo	'<li><a href=" ' . site_url("shoppingcart/Edit") . '">Edit</a></li>';
+						echo	'<li><a href=" ' . site_url("shoppingcart/Checkout"). '">Checkout</a></li>';
 						echo	'</ul>';
 						echo	'</li>';
 
@@ -67,14 +67,14 @@
 						}
 		            	if ($usr != NULL)
 		            	{
-		            		echo '<li><a href="' . site_url("User/logout") . '">[' . "Logout: " . $usr->email . ']</a></li>';
+		            		echo '<li><a href="' . site_url("user/logout") . '">[' . "Logout: " . $usr->email . ']</a></li>';
 		            	}else
 		            	{
-		            		echo '<li><a href="' . site_url("User/index") . '">[ Login/Register ]</a></li>';
+		            		echo '<li><a href="' . site_url("user/index") . '">[ Login/Register ]</a></li>';
 		            	}
             	}else
             	{
-            		echo '<li><a href="' . site_url("User/index") . '">[ Login/Register ]</a></li>';
+            		echo '<li><a href="' . site_url("user/index") . '">[ Login/Register ]</a></li>';
             	}
             ?>
                 

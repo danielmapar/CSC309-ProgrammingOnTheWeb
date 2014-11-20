@@ -49,11 +49,10 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'dev';
-$db['default']['password'] = '123456789';
+$db['default']['username'] = 'csc309A3';
+$db['default']['password'] = 'csc309pass';
 $db['default']['database'] = 'estore';
 $db['default']['dbdriver'] = 'mysqli';
-$db['default']['port']     = "3306";  
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;

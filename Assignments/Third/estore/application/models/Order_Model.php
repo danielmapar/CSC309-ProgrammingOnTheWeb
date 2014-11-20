@@ -1,6 +1,6 @@
 <?php
 
-class Order_Model extends CI_Model{
+class order_model extends CI_Model{
 	
 	function checkout($order)
 	{

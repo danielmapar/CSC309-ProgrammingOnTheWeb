@@ -3,7 +3,7 @@ include("application/views/header.php") ?>
 
 <h2>New item</h2>
 <div class="row">
- <h4>Iten information</h4>
+ <h4>Item information</h4>
       <?php echo form_open_multipart("/admin/insertProd", 'class="form-horizontal" role="form"'); ?>
 	   <div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>

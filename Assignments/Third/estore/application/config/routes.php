@@ -38,11 +38,11 @@
 |
 */
 
-$route['default_controller'] = "EStore";
+$route['default_controller'] = "estore";
 $route['404_override'] = '';
-$route['user/'] = "User";
-$route['shoppingcart/'] = "ShoppingCart";
-$route['admin/'] = "Admin";
+$route['user/'] = "user";
+$route['shoppingcart/'] = "shoppingcart";
+$route['admin/'] = "admin";
  
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

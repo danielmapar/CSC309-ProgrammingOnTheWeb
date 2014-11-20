@@ -1,15 +1,16 @@
 <?php
 
-class Customer_Model extends CI_Model{
+class customer_model extends CI_Model{
 
     function login($login, $pass)
     {
         $query = null;
-        if ($login == 'admin' && $pass == 'admin')
+        if ($login == 'admin' && $pass == 'adminadmin')
         {
-        	$cust = new Customer();
+        	$cust = new customer();
         	$cust->id = 0;
-        	$cust->first = 'Administrador';
+        	$cust->first = 'Administrator';
+            $cust->email = 'adm@adm.com';
         	$cust->last = ' ';
         	$cust->login = 'admin';
         	$cust->password = ' ';
@@ -18,7 +19,7 @@ class Customer_Model extends CI_Model{
         } else{
             $query = $this->db->get_where('customers',array('login' => $login, 'password' => $pass));
         }
-        return $query->row(0,'Customer');
+        return $query->row(0,'customer');
     }
     
     function createAccount($customer){
@@ -31,7 +32,7 @@ class Customer_Model extends CI_Model{
     	
     }
     function getClientByEmail($email){
-        $query = $this->db->get_where('customers',array('email' => $email));
+        $query = $this->db->get_where("customers",array('email' => $email));
         if($query->num_rows() > 0){
             return TRUE;
         }
@@ -39,7 +40,7 @@ class Customer_Model extends CI_Model{
     }
 
     function getClientByLogin($login){
-        $query = $this->db->get_where('customers',array('login' => $login));
+        $query = $this->db->get_where("customers",array('login' => $login));
         if($query->num_rows() > 0){
             return TRUE;
         }

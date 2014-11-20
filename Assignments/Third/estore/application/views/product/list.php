@@ -26,7 +26,7 @@ foreach ($products as $product) {
     echo "<td>" . $product->price       . "</td>";
     echo "<td><img src='" . base_url() . "images/product/" . $product->photo_url . "' width='100px' class='img-thumbnail'/></td>";
     if(isset($_SESSION['customer'])){
-    	echo "<td><a href=" . site_url("EStore/add") . "/" . $product->id . "><span class='glyphicon glyphicon-plus'></span></a></td>";
+    	echo "<td><a href=" . site_url("estore/add") . "/" . $product->id . "><span class='glyphicon glyphicon-plus'></span></a></td>";
     }
     echo "</tr>";
 }

@@ -14,7 +14,7 @@ if(!empty($products)){
 	    echo "<td><img src='" . base_url() . "images/product/" .  $product[0]->photo_url . "' width='100px' class='img-thumbnail'/></td>";
 	    echo "<td>" . $product[0]->qtd . "</td>";
 	    echo "<td>" . $product[0]->qtd * $product[0]->price . "</td>";
-	    echo "<td><a href=" . site_url("ShoppingCart/add") . "/" .  $product[0]->id . "><span class='glyphicon glyphicon-plus'></span></a><a href=" . site_url("EStore/remove") . "/" .  $product[0]->id . "><span class='glyphicon glyphicon-minus'></span></a></td>";
+	    echo "<td><a href=" . site_url("shoppingcart/add") . "/" .  $product[0]->id . "><span class='glyphicon glyphicon-plus'></span></a><a href=" . site_url("estore/remove") . "/" .  $product[0]->id . "><span class='glyphicon glyphicon-minus'></span></a></td>";
 	    echo "</tr>";
 	}
 }

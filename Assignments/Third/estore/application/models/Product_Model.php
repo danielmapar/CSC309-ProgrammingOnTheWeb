@@ -1,5 +1,5 @@
 <?php
-class Product_Model extends CI_Model{
+class product_model extends CI_Model{
 
     function getAll()
     {
@@ -19,7 +19,7 @@ class Product_Model extends CI_Model{
     }
 
     function insert($product) {
-        return $this->db->insert("product", array('name' => $product->name,
+        return $this->db->insert("products", array('name' => $product->name,
             'description' => $product->description,
             'price' => $product->price,
             'photo_url' => $product->photo_url));
@@ -27,7 +27,7 @@ class Product_Model extends CI_Model{
 
     function update($product) {
         $this->db->where('id', $product->id);
-        return $this->db->update("product", array('name' => $product->name,
+        return $this->db->update("products", array('name' => $product->name,
             'description' => $product->description,
             'price' => $product->price));
     }

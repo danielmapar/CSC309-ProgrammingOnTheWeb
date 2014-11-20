@@ -1,6 +1,6 @@
 <?php
 
-class Order {
+class order {
    public $id;
    public $customer_id;
    public $order_date;

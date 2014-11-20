@@ -24,6 +24,12 @@ include("application/views/header.php") ?>
 	    </div>
 	  </div>
 	  <div class="form-group">
+	    <label for="inputEmail3" class="col-sm-2 control-label">Photo</label>
+	    <div class="col-sm-3">
+				<input type="file" name="userfile" size="20" />
+	    </div>
+	  </div>
+	  <div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
 	      <?php echo form_submit('submit','Update product','class="btn btn-primary"'); ?>
 	    </div>

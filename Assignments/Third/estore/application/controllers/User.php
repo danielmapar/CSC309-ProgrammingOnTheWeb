@@ -1,5 +1,5 @@
 <?php
-class User extends CI_Controller {
+class user extends CI_Controller {
 	function __construct() {
 		// Call the Controller constructor
 		parent::__construct();
@@ -22,12 +22,12 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules('last','last','required');
 		$this->form_validation->set_rules('password','password','required');
 		
-		$this->load->model('Customer_Model');
-		$user_exist = $this->Customer_Model->getClientByEmail($this->input->get_post('email'));
+		$this->load->model('customer_model');
+		$user_exist = $this->customer_model->getClientByEmail($this->input->get_post('email'));
 		
 		$message = " ";
 		if(!$user_exist){
-			$user_exist = $this->Customer_Model->getClientByLogin($this->input->get_post('login'));
+			$user_exist = $this->customer_model->getClientByLogin($this->input->get_post('login'));
 			$message = 'Login already in use!';
 		}else{
 			$message = 'Email already in use!';
@@ -35,7 +35,7 @@ class User extends CI_Controller {
 
 		if ($this->form_validation->run() && !$user_exist){
 
-			$customer = new Customer();
+			$customer = new customer();
 				
 			$customer->email = $this->input->get_post('email');
 			$customer->login = $this->input->get_post('login');
@@ -43,24 +43,24 @@ class User extends CI_Controller {
 			$customer->last = $this->input->get_post('last');
 			$customer->password = $this->input->get_post('password');
 			
-			$this->Customer_Model->createAccount($customer);
+			$this->customer_model->createAccount($customer);
 			
 			if (session_status() == PHP_SESSION_NONE) {
 	   			 session_start();
 			}
-			$_SESSION['customer'] = $this->Customer_Model->login($customer->login,$customer->password);
+			$_SESSION['customer'] = $this->customer_model->login($customer->login,$customer->password);
 
 
-			redirect('EStore', 'refresh');
+			redirect('estore', 'refresh');
 		}
 		$this->session->set_flashdata('message', $message);
-		redirect('User', 'refresh');
+		redirect('user', 'refresh');
 		
 	}
 	
    function login(){
-		$this->load->model('Customer_Model');
-		$usr = $this->Customer_Model->login($this->input->get_post('login'),$this->input->get_post('password'));
+		$this->load->model('customer_model');
+		$usr = $this->customer_model->login($this->input->get_post('login'),$this->input->get_post('password'));
 		if ( $usr != NULL)
 		{
 			if (session_status() == PHP_SESSION_NONE) {
@@ -71,14 +71,14 @@ class User extends CI_Controller {
 			
 			if($usr->login == 'admin')
 			{
-				redirect('Admin/index');
+				redirect('admin/index');
 				return;
 			}
 
-            redirect('EStore', 'refresh');
+            redirect('estore', 'refresh');
 		}
 		$this->session->set_flashdata('message', 'Login failed!');
-		redirect('User', 'refresh');
+		redirect('user', 'refresh');
    }
 
    function logout()
@@ -90,7 +90,7 @@ class User extends CI_Controller {
    			unset($_SESSION['customer']);
    		session_destroy();
    		
-        redirect('EStore', 'refresh');
+        redirect('estore', 'refresh');
    		
    }
    

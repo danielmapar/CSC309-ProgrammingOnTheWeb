@@ -13,7 +13,7 @@ foreach ($customer as $cs) {
     echo "<td>" . $cs->last . "</td>";
     echo "<td>" . $cs->login . "</td>";
     echo "<td>" . $cs->email . "</td>";
-    echo "<td><a href=" . site_url("Admin/DeleteCustomer") . "/" . $cs->id . "><span class='glyphicon glyphicon-remove'></span></a></td>";
+    echo "<td><a href=" . site_url("admin/DeleteCustomer") . "/" . $cs->id . "><span class='glyphicon glyphicon-remove'></span></a></td>";
     echo "</tr>";
 }
 echo "<table>";

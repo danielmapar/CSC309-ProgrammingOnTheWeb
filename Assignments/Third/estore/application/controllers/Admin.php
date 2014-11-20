@@ -1,5 +1,5 @@
 <?php
-class Admin extends CI_Controller {
+class admin extends CI_Controller {
 	function __construct() {
 		// Call the Controller constructor
 		parent::__construct();
@@ -11,7 +11,7 @@ class Admin extends CI_Controller {
 			session_start();
 		}
 		if (!(isset($_SESSION['customer']) && $_SESSION['customer']->login == 'admin')){
-			redirect('EStore', 'refresh');
+			redirect('estore', 'refresh');
 		}
 		
 	}
@@ -20,7 +20,7 @@ class Admin extends CI_Controller {
 		$this->load->model('admin_model');
 		$orders = $this->admin_model->getOrders();
 		$data['orders'] = $orders;
-		$this->load->view('Admin/ShowOrders.php', $data);
+		$this->load->view('admin/showorders.php', $data);
 	}
 	
 	function ShowOrders()
@@ -28,7 +28,7 @@ class Admin extends CI_Controller {
 		$this->load->model('admin_model');
 		$orders = $this->admin_model->getOrders();
 		$data['orders'] = $orders;
-		$this->load->view('Admin/ShowOrders.php', $data);
+		$this->load->view('admin/showorders.php', $data);
 	}
 	
 	function Edit()
@@ -37,7 +37,7 @@ class Admin extends CI_Controller {
 		$products = $this->product_model->getAll();
 		$data['products']=$products;
 		
-		$this->load->view('Admin/Edit.php',$data);
+		$this->load->view('admin/edit.php',$data);
 	}
 	
 	function DeleteItem($id)
@@ -49,7 +49,7 @@ class Admin extends CI_Controller {
 	
 	function newProd()
 	{
-		$this->load->view('Admin/NewProduct.php');
+		$this->load->view('admin/newproduct.php');
 	}
 	
 	function update($id)
@@ -59,25 +59,38 @@ class Admin extends CI_Controller {
 		$products = $this->admin_model->get($id);
 		$data['products']=$products;
 			
-		$this->load->view('Admin/updateProd.php',$data);
+		$this->load->view('admin/updateprod.php',$data);
 	}
 	
 	function updateProd($id)
 	{
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name','name','required|is_unique[product.name]');
+		$this->load->model('admin_model');
+		$this->form_validation->set_rules('name','name','required');
 		$this->form_validation->set_rules('description','description','required');
 		$this->form_validation->set_rules('price','price','required');
-		if ($this->form_validation->run()){
-			$this->load->model('admin_model');
-			$product = new Product();
+		
+		$fileUploadSuccess = $this->upload->do_upload();
+
+		if ($this->form_validation->run() == $fileUploadSuccess){
+			$product = new product();
+
 			$product->id = $id;
 			$product->name = $this->input->get_post('name');
 			$product->description = $this->input->get_post('description');
 			$product->price = $this->input->get_post('price');
+
+	    	$data = $this->upload->data();
+	    	$product->photo_url = $data['file_name'];
+
 			$this->admin_model->update($product);
+			redirect('admin/Edit');
 		}
-		redirect('admin/Edit');
+		else
+		{
+			var_dump($this->form_validation->run());
+			var_dump($fileUploadSuccess);
+			print_r($this->upload->display_errors());
+		}
 	}
 	
 	function insertProd()
@@ -90,7 +103,7 @@ class Admin extends CI_Controller {
 		$fileUploadSuccess = $this->upload->do_upload();
 		
 	    if ($this->form_validation->run() == $fileUploadSuccess){
-	    	$product = new Product();
+	    	$product = new product();
 	    	
 	    	$product->name = $this->input->get_post('name');
 	    	$product->description = $this->input->get_post('description');
@@ -101,7 +114,7 @@ class Admin extends CI_Controller {
 
 	    	$this->admin_model->insert($product);
 	    	
-	    	redirect('admin/edit');
+	    	redirect('admin/Edit');
 	    	
 		}
 		else
@@ -115,7 +128,7 @@ class Admin extends CI_Controller {
 		$this->load->model('admin_model');
 		$order = $this->admin_model->deleteCustomer($id);
 		
-		redirect("Admin/DeleteCustomerShow");
+		redirect("admin/DeleteCustomerShow");
 	}
 	
 	function DeleteCustomerShow()
@@ -123,6 +136,6 @@ class Admin extends CI_Controller {
 		$this->load->model('admin_model');
 		$customer = $this->admin_model->getCustomers();
 		$data['customer'] = $customer;
-		$this->load->view('Admin/DeleteCustomer.php',$data);
+		$this->load->view('admin/deletecustomer.php',$data);
 	}
 }

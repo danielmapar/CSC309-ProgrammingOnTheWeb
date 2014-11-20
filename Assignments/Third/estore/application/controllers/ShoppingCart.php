@@ -1,6 +1,6 @@
 <?php
 
-class ShoppingCart extends CI_Controller
+class shoppingcart extends CI_Controller
 {
 	function __construct() {
 		// Call the Controller constructor
@@ -13,7 +13,7 @@ class ShoppingCart extends CI_Controller
 	
 	function index ()
 	{
-		$this->load->view('ShoppingCart/Cart.php');
+		$this->load->view('shoppingcart/cart.php');
 	}
 	
 	function Edit(){
@@ -34,7 +34,7 @@ class ShoppingCart extends CI_Controller
 		}
 		
 		$data['products']=$arr;
-		$this->load->view('ShoppingCart/Cart.php',$data);
+		$this->load->view('shoppingcart/cart.php',$data);
 	}
 	
 	function add($id)
@@ -51,7 +51,7 @@ class ShoppingCart extends CI_Controller
 			if (isset($arr[$id])) {
 				$arr[$id] = $arr[$id] + 1;
 			}else{
-				$arr = array_merge($arr, array($id => 1));
+				$arr = array_merge($arr,array($id => 1));
 			}
 		}else
 		{
@@ -59,20 +59,20 @@ class ShoppingCart extends CI_Controller
 		}
 			
 		$_SESSION['cart'] = $arr;
-		redirect("ShoppingCart/Edit");
+		redirect("shoppingcart/Edit");
 	}
 	
 	function Checkout()
 	{
+		$data['message'] = $this->session->flashdata('message');
 		$arr = array();
 		if (session_status() == PHP_SESSION_NONE) {
 			session_start();
 		}
 		if(isset($_SESSION['cart']))
 		{
-
 			$item = $_SESSION['cart'];
-			while (list($key, $value) = each($item)) {
+			foreach ($item as $key => $value){
 				$this->load->model('product_model');
 				$prod = $this->product_model->get($key);
 				$prod->qtd = $value;
@@ -81,23 +81,23 @@ class ShoppingCart extends CI_Controller
 		
 		}
 		if(empty($arr)){
-			redirect("EStore");
+			redirect("estore");
 		}
 		$data['products']=$arr;
-		$this->load->view('ShoppingCart/Checkout.php',$data);
+		$this->load->view('shoppingcart/checkout.php',$data);
 		
 	}
 	
 	function saveOrder()
 	{
-		$this->load->model('Order_Model');
-		$checkout = new Order();
+		$this->load->model('order_model');
+		$checkout = new order();
 		$this->form_validation->set_rules('mm','mm','required');
 		$this->form_validation->set_rules('creditcard','creditcard','required');
 		$this->form_validation->set_rules('yy','yy','required');
 	
 		if ($this->form_validation->run()){
-			
+
 			if (session_status() == PHP_SESSION_NONE) {
 				session_start();
 			}
@@ -117,23 +117,32 @@ class ShoppingCart extends CI_Controller
 				$checkout->creditcard_month = $this->input->get_post('mm');
 				$checkout->creditcard_number = $this->input->get_post('creditcard');
 				$checkout->creditcard_year = $this->input->get_post('yy');
+				
+				$order_date = $checkout->creditcard_year . $checkout->creditcard_month;
+    			$now   = new DateTime();
+    			$now = $now->format('Ym');
+				if((int)$order_date < (int)$now){
+					$this->session->set_flashdata('message', 'Invalid creditcard date!');
+					redirect("shoppingcart/Checkout", 'refresh');
+				}
+
 				$checkout->customer_id = $usr->id;
 				$checkout->order_date = $date;
 				$checkout->order_time = $time;
 				$checkout->total = $total;
-				$this->Order_Model->checkout($checkout);
+				$this->order_model->checkout($checkout);
 
-				$order = $this->Order_Model->getLastOrder($usr->id, $date);
+				$order = $this->order_model->getLastOrder($usr->id, $date);
 
 				foreach ($item as $key => $value) {
 					$prod = $this->product_model->get($key);
 					
-					$item = new Item();
+					$item = new item();
 					
 					$item->product_id = $key;
 					$item->quantity = $value;
 	                $item->order_id = $order->id;
-					$this->Order_Model->checkoutItem($item);
+					$this->order_model->checkoutItem($item);
 				}
 				
 			}

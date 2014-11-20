@@ -1,5 +1,5 @@
 <?php
-class EStore extends CI_Controller {
+class estore extends CI_Controller {
 
     function __construct() {
         // Call the Controller constructor
@@ -33,7 +33,7 @@ class EStore extends CI_Controller {
 		 	if (isset($arr[$id])) {
 		 		$arr[$id] = $arr[$id] + 1;
 		 	}else{
-		 		$arr = array_merge($arr, array($id => 1));
+		 		$arr = $arr + array($id => 5);
 		 	}
 		 }else
 		 {
@@ -66,7 +66,7 @@ class EStore extends CI_Controller {
     	if(isset($_SESSION['cart'])){ 
             $_SESSION['cart'] = $arr; 
         }
-    	redirect("ShoppingCart/Edit");
+    	redirect("shoppingcart/Edit");
     }
     
 }

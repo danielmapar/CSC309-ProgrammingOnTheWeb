@@ -1,5 +1,5 @@
 <?php
-class Admin_Model extends CI_Model{
+class admin_model extends CI_Model{
 
 	function getOrders()
 	{
@@ -12,7 +12,7 @@ class Admin_Model extends CI_Model{
 	{
 		$query = $this->db->get_where('products',array('id' => $id));
 	
-		return $query->row(0,'Products');
+		return $query->row(0,'product');
 	}
 	
 	function getCustomers()
@@ -42,6 +42,7 @@ class Admin_Model extends CI_Model{
 		$this->db->where('id', $product->id);
 		return $this->db->update("products", array('name' => $product->name,
 				'description' => $product->description,
-				'price' => $product->price));
+				'price' => $product->price,
+				'photo_url' => $product->photo_url));
 	}
 }

@@ -3,8 +3,15 @@ include("application/views/header.php") ?>
 
 <h2>Checkout</h2>
 <div class="row">
+  <?php if($message){ ?>
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    <?= $message ?>
+  </div>
+  <?php } ?>
   <h4>Personal information</h4>
-      <?php echo form_open_multipart("/ShoppingCart/saveOrder", 'class="form-horizontal" role="form"'); ?>
+      <?php echo form_open_multipart("/shoppingcart/saveOrder", 'class="form-horizontal" role="form"'); ?>
 	   <div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">Creditcard</label>
 	    <div class="col-sm-4">
