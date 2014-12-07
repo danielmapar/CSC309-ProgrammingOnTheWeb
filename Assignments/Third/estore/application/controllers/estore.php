@@ -33,7 +33,7 @@ class estore extends CI_Controller {
 		 	if (isset($arr[$id])) {
 		 		$arr[$id] = $arr[$id] + 1;
 		 	}else{
-		 		$arr = $arr + array($id => 5);
+		 		$arr = $arr + array($id => 1);
 		 	}
 		 }else
 		 {

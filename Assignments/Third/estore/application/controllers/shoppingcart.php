@@ -51,7 +51,7 @@ class shoppingcart extends CI_Controller
 			if (isset($arr[$id])) {
 				$arr[$id] = $arr[$id] + 1;
 			}else{
-				$arr = array_merge($arr,array($id => 1));
+				$arr = $arr + array($id => 1);
 			}
 		}else
 		{

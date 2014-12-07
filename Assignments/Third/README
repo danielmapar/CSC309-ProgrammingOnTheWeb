@@ -1,0 +1,15 @@
+Amazon AMI id:ami-39b1e409
+Files location: /var/www/html/estore/
+Apache will start during VM boot up. If it doesn't just execute --> /etc/init.d/apache2 start
+To check if it is online --> chkconfig --list http
+------------
+Browser used during testing: Chrome - version 39.0.2171.65 (64-bit)
+Admin account information (password must be better equal to 6 letters): 
+--->username: admin
+--->password: adminadmin 
+For the sake of testing, a temporary GMail account was created to send the receipt via email:
+--->email account: estoresmtp@gmail.com
+--->password: estore123
+Note: This email account is already configured in the source code (estore/application/views/product/print.php)
+------------
+Documentation for the Web site attached in Markus together with this file.
